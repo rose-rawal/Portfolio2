@@ -1,0 +1,97 @@
+/* All */
+body{
+  background-color: #1A1A1D;
+}
+
+/* Navbar */
+
+.nav-wrapper{
+  position: absolute;
+  width: 100vw;
+}
+.navbar-block{
+  background-color: #A64D79;
+  /* color: #FDDBBB ; */
+  display: flex;
+  justify-content: space-between;
+  opacity: 70%;
+  padding: 0 2.5rem;
+  
+}
+
+.navbar-heading{
+  display: flex;
+  align-items: center;
+}
+
+.navbar-link{
+  display: flex;
+  list-style-type: none;
+  gap:20px;
+  font-weight: bolder;
+  font-family: "Caveat", cursive;
+  font-optical-sizing: auto;
+  font-size:25px;
+  font-weight: bolder;
+  font-style: normal;
+}
+
+.navbar-link li{
+  transition: transform 0.4s, color 0.3s;
+}
+.navbar-link li:hover{
+  color:#F0C1E1;
+  cursor: pointer;
+  transform: rotateZ(-10deg);
+
+}
+
+.text-header{
+  color: white;
+  font-size: 35px;
+  
+}
+
+.text-header > *{
+  margin: 10px 0;
+}
+
+.text-header :last-child{
+  margin-top: 30px;
+}
+
+/* Home Page */
+/* Hero Section */
+
+.screen-display{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: background-image 2s;
+}
+
+.hero-button{
+  background-color: transparent; 
+  border: 2px solid #6A1E55; 
+  padding: 0.5rem 2rem;
+  font-size: 30px;
+  border-radius: 1.8rem;
+  color: #6A1E55;
+  transition: transform 0.4s, box-shadow 0.4s, text-shadow 0.4s;
+}
+
+.hero-button:hover{
+  text-shadow: 1px 1px 3px #A64D79;
+  box-shadow: 1px 1px 5px #A64D79;
+  transform: scale(1.2);
+}
+
+.backgroundLandscape{
+  background-image: url('./assets/Landscape.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
