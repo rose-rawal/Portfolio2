@@ -4,6 +4,8 @@ The personal site of **Rose Rawal**, a software developer based in Kathmandu, Ne
 It is a four-page portfolio for client and enterprise work, personal projects and
 contact details — built as a small design system rather than a template.
 
+**Live at [roserawal.com.np](https://roserawal.com.np).**
+
 Live sections: **Home**, **About**, **Work**, **Contact**.
 
 ---
