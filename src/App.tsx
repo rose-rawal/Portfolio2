@@ -12,6 +12,7 @@ import Preloader from "./layout/Preloader.tsx";
 import Curtain from "./layout/Curtain.tsx";
 import CatLayer from "./layout/CatLayer.tsx";
 import { scroll } from "./lib/smoothScroll.ts";
+import { armClickSound } from "./lib/clickSound.ts";
 
 /** ?nopreload skips the intro screen — handy for visual checks and testing. */
 const skipIntro =
@@ -46,6 +47,9 @@ function Shell() {
       /* storage unavailable — mode still works for this session */
     }
   }, [mode]);
+
+  /* Tactile key-press feedback on every primary pointer press */
+  useEffect(() => armClickSound(), []);
 
   /* ?y=NNN jumps straight to a scroll offset — used for visual checks. */
   useEffect(() => {
