@@ -115,7 +115,6 @@ export type Project = {
   links: { label: string; url: string }[];
   image: string;
   imageAlt: string;
-  hoverImage?: string;
 };
 
 export type ProProject = {
@@ -237,9 +236,8 @@ export const projects: Project[] = [
       { label: "Visit site", url: "https://peach-kuro.netlify.app/" },
       { label: "Source", url: "https://github.com/rose-rawal" },
     ],
-    image: "/media/chatapp.png",
-    imageAlt: "MyChat chat room interface",
-    hoverImage: "/media/chatapp2.png",
+    image: "/media/proj/chat.jpg",
+    imageAlt: "Two people on a park bench, one checking a phone",
   },
   {
     index: "P8",
@@ -255,9 +253,8 @@ export const projects: Project[] = [
     links: [
       { label: "Source", url: "https://github.com/rose-rawal/emergency" },
     ],
-    image: "/media/emergency1.jpg",
-    imageAlt: "Emergency app screens",
-    hoverImage: "/media/emergency2.jpg",
+    image: "/media/proj/sos.jpg",
+    imageAlt: "Ambulance parked on a street outside a hospital",
   },
   {
     index: "P9",
@@ -271,9 +268,8 @@ export const projects: Project[] = [
     stack: ["HTML", "CSS", "JS", "React", "Bootstrap"],
     builtBy: "Self",
     links: [{ label: "Visit site", url: "https://peaches-kuro.netlify.app/" }],
-    image: "/media/cocktailapp.png",
-    imageAlt: "Pear cocktail search interface",
-    hoverImage: "/media/cocktailapp2.png",
+    image: "/media/proj/pear.jpg",
+    imageAlt: "Cocktail on a bar counter in warm light",
   },
   {
     index: "P10",
@@ -287,9 +283,8 @@ export const projects: Project[] = [
     stack: ["HTML", "CSS", "Bootstrap"],
     builtBy: "Self",
     links: [{ label: "Visit site", url: "https://eureka-kuro.netlify.app/" }],
-    image: "/media/landingpage.png",
-    imageAlt: "Eureka ecommerce landing page",
-    hoverImage: "/media/landingpage2.png",
+    image: "/media/proj/eureka.jpg",
+    imageAlt: "Gift wrapping and a laptop on a desk",
   },
 ];
 
