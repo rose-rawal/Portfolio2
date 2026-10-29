@@ -1,0 +1,4 @@
+# Cloudflare Pages SPA fallback.
+# Every path that is not a real file is served the React app so client-side
+# routes (/about, /work, /contact and project detail URLs) survive a reload.
+/*    /index.html   200

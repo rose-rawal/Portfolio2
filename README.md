@@ -58,7 +58,9 @@ npm test
 ```
 
 The build output in `build/` is a static site — any static host will serve it, but it
-needs an SPA fallback so client-side routes resolve.
+needs an SPA fallback so client-side routes resolve. [`public/_redirects`](./public/_redirects)
+provides that for Cloudflare Pages; [`netlify.toml`](./netlify.toml) and
+[`vercel.json`](./vercel.json) do the same for those hosts.
 
 Useful query flags while developing or reviewing:
 
@@ -69,21 +71,33 @@ Useful query flags while developing or reviewing:
 
 ## Deployment
 
-**Netlify** is the intended host — [`netlify.toml`](./netlify.toml) already sets:
+**Cloudflare Pages** is the production host. It builds straight from this repository on
+every push to `main`.
 
-```toml
-[build]
-  command = "npm run build"
-  publish = "build"
+| Setting | Value |
+| --- | --- |
+| Framework preset | Create React App |
+| Build command | `npm run build` |
+| Build output directory | `build` |
+| Environment variables | `GENERATE_SOURCEMAP=false` |
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-```
+Node is pinned by [`.nvmrc`](./.nvmrc) (20). `GENERATE_SOURCEMAP=false` skips the
+bundled source maps — they add several MB to the deploy and one dependency ships a
+broken `.map` that otherwise makes the build finish "with warnings".
 
-A [`vercel.json`](./vercel.json) rewrite is included as well, so the same build works
-on Vercel without further configuration.
+Two files in `public/` are copied into the build and read by Pages on every request:
+
+- **`_redirects`** — `/* /index.html 200`, the SPA fallback, so deep links such as
+  `/work` or `/projects/…` reload correctly instead of 404ing.
+- **`_headers`** — security headers plus long-lived caching for the content-hashed
+  `/static/*` bundle.
+
+The domain `roserawal.com.np` is served from a Cloudflare zone (Cloudflare DNS, proxied)
+with Universal SSL, so certificates renew automatically. Both the apex and `www` are
+attached to the Pages project; a Redirect Rule sends `www` to the apex with a 301.
+
+The same build also works unchanged on Netlify ([`netlify.toml`](./netlify.toml)) and
+Vercel ([`vercel.json`](./vercel.json)) — both config files are kept as fallbacks.
 
 ## Project structure
 
@@ -100,6 +114,8 @@ src/
 ├── model/cat/             # three.js scene for the cat
 └── assets/                # portrait photographs
 public/
+├── _redirects             # SPA fallback for Cloudflare Pages
+├── _headers               # security + cache headers for Cloudflare Pages
 ├── cat_dispenser.glb      # 3D model
 ├── media/proj/            # project imagery
 ├── media/sfx/             # click-sound samples
