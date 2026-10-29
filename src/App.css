@@ -137,6 +137,43 @@
   }
 }
 
+/* Lo-fi toggle — reuses the round header-button skin, but swaps hover-spin
+   for a softly bouncing equaliser while the track is playing. */
+.header__sound:hover {
+  transform: none;
+}
+
+.header__sound .eq__bar {
+  transform-box: fill-box;
+  transform-origin: bottom;
+  animation: eq-rise 900ms var(--ease-out) infinite alternate;
+}
+
+.header__sound .eq__bar--2 {
+  animation-duration: 660ms;
+  animation-delay: 130ms;
+}
+
+.header__sound .eq__bar--3 {
+  animation-duration: 1060ms;
+  animation-delay: 260ms;
+}
+
+@keyframes eq-rise {
+  from {
+    transform: scaleY(0.32);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header__sound .eq__bar {
+    animation: none;
+  }
+}
+
 .nav-cta {
   display: flex;
   align-items: center;
@@ -1767,6 +1804,27 @@
     --fs-a2: 15vw;
     --fs-h1: 12.5vw;
     --fs-h2: 9.5vw;
+  }
+
+  /* Four controls share the right-hand cluster here (lo-fi, theme, CTA), so
+     tighten the spacing — and drop the decorative CTA dots — to keep the
+     "Let's Talk" pill inside the viewport alongside them. */
+  .header__right {
+    gap: 0.5rem;
+  }
+
+  .header__theme {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  .nav-cta {
+    padding: 0.45rem 0.7rem;
+    gap: 0.45rem;
+  }
+
+  .nav-cta__dot {
+    display: none;
   }
 
   .hero__foot {

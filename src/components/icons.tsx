@@ -90,3 +90,53 @@ export function IconMoon(props: IconProps) {
     </Svg>
   );
 }
+
+/** Lo-fi toggle glyphs: a struck-through note when silent… */
+export function IconMusicOff(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <path d="M9 18V6l9-2v7" />
+      <circle cx="6.5" cy="18" r="2.5" />
+      <circle cx="15.5" cy="15.5" r="2.5" />
+      <path d="M3.5 3.5 20.5 20.5" />
+    </Svg>
+  );
+}
+
+/** …and a live equaliser while it plays (bars are animated in CSS). */
+export function IconEqualizer(props: IconProps) {
+  return (
+    <Svg {...props}>
+      <rect
+        className="eq__bar eq__bar--1"
+        x="4.6"
+        y="5"
+        width="3.2"
+        height="14"
+        rx="1.6"
+        fill="currentColor"
+        stroke="none"
+      />
+      <rect
+        className="eq__bar eq__bar--2"
+        x="10.4"
+        y="5"
+        width="3.2"
+        height="14"
+        rx="1.6"
+        fill="currentColor"
+        stroke="none"
+      />
+      <rect
+        className="eq__bar eq__bar--3"
+        x="16.2"
+        y="5"
+        width="3.2"
+        height="14"
+        rx="1.6"
+        fill="currentColor"
+        stroke="none"
+      />
+    </Svg>
+  );
+}

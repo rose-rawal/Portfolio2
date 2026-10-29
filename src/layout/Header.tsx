@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { RollLabel } from "../components/ui.tsx";
 import { IconMoon, IconSun } from "../components/icons.tsx";
 import { nav, profile } from "../data/portfolio.ts";
+import SoundToggle from "./SoundToggle.tsx";
 
 function nepalTime() {
   const now = new Date();
@@ -100,6 +101,7 @@ export default function Header({
             <span className="l1">{time}</span>
             <span className="l1">{profile.region}</span>
           </div>
+          <SoundToggle />
           <button
             className="header__theme"
             type="button"
