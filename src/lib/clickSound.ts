@@ -1,10 +1,10 @@
 /**
  * Tactile key-press feedback for primary pointer presses.
  *
- * Two single-key samples extracted from a CC0 IBM Model M recording
- * (Wikimedia Commons) alternate with a little pitch variation so rapid
- * clicking doesn't sound like a machine gun. Web Audio keeps the latency
- * low enough to feel like part of the click itself.
+ * Two single-key samples cut from a CC0 mechanical-keyboard typing recording
+ * (Dustin Davis, Wikimedia Commons) alternate with a little pitch variation
+ * so rapid clicking doesn't sound like a machine gun. Web Audio keeps the
+ * latency low enough to feel like part of the click itself.
  */
 const SAMPLES = ["/media/sfx/key-press.wav", "/media/sfx/key-press-2.wav"];
 const VOLUME = 0.34;
