@@ -631,31 +631,6 @@
   gap: 8rem;
 }
 
-.s-work__block {
-  margin-top: 4.5rem;
-}
-
-.s-work__block .label-line {
-  margin-bottom: 1.25rem;
-}
-
-.s-work__pro {
-  border-top: 1px solid var(--dark-15);
-}
-
-.prow {
-  display: grid;
-  grid-template-columns: 3rem minmax(0, 1fr) minmax(0, auto);
-  gap: 2rem;
-  align-items: baseline;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid var(--dark-15);
-}
-
-.prow__meta {
-  text-align: right;
-}
-
 /* ============================================================
    SECTION — APPROACH + MARQUEE
 ============================================================ */
@@ -1561,20 +1536,6 @@
 
   .s-work__list {
     gap: 5rem;
-  }
-
-  .s-work__block {
-    margin-top: 3rem;
-  }
-
-  .prow {
-    grid-template-columns: 2.25rem minmax(0, 1fr);
-    gap: 0.5rem 1rem;
-  }
-
-  .prow__meta {
-    grid-column: 2;
-    text-align: left;
   }
 
   /* approach */
