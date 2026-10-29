@@ -328,7 +328,8 @@ const BLOB_REST = blobPath(BLOB_RADII);
 /**
  * Portrait photo clipped to a simple organic blob — a clean silhouette
  * of 4–5 large, gentle curves, no outline. Hovering makes the outline
- * wriggle softly.
+ * wriggle softly; the wriggle fades in and out so the shape never jumps
+ * to a different pose when the pointer arrives or leaves.
  */
 export function WigglePhoto({
   src,
@@ -343,29 +344,56 @@ export function WigglePhoto({
   const clipId = `wiggle-${uid}`;
   const path = useRef<SVGPathElement>(null);
   const raf = useRef(0);
+  // phase keeps ticking across hovers; amp eases 0↔1 so every frame is continuous
+  const anim = useRef({ phase: 0, amp: 0, target: 0, last: 0 });
 
-  useEffect(() => () => cancelAnimationFrame(raf.current), []);
-
-  const handleEnter = () => {
+  const stop = () => {
     cancelAnimationFrame(raf.current);
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const t0 = performance.now();
-    const tick = (t: number) => {
-      const s = (t - t0) / 1000;
-      const d = blobPath(
-        BLOB_RADII.map(
-          (r, i) => r + Math.sin(s * BLOB_FREQ[i] + BLOB_PHASE[i]) * BLOB_AMP[i]
-        )
-      );
-      path.current?.setAttribute("d", d);
-      raf.current = requestAnimationFrame(tick);
-    };
+    raf.current = 0;
+    anim.current.last = 0;
+  };
+
+  useEffect(() => stop, []);
+
+  const tick = (now: number) => {
+    const a = anim.current;
+    const dt = a.last ? Math.min(0.05, (now - a.last) / 1000) : 0;
+    a.last = now;
+    a.phase += dt;
+    // clamp the easing step so a late frame can't produce one visible hop
+    const dtAmp = Math.min(dt, 1 / 60);
+    const tau = a.target > a.amp ? 0.16 : 0.15;
+    a.amp += (a.target - a.amp) * (1 - Math.exp(-dtAmp / tau));
+
+    if (a.target === 0 && a.amp < 0.004) {
+      a.amp = 0;
+      path.current?.setAttribute("d", BLOB_REST);
+      raf.current = 0;
+      a.last = 0;
+      return;
+    }
+
+    const d = blobPath(
+      BLOB_RADII.map(
+        (r, i) =>
+          r +
+          a.amp * Math.sin(a.phase * BLOB_FREQ[i] + BLOB_PHASE[i]) * BLOB_AMP[i]
+      )
+    );
+    path.current?.setAttribute("d", d);
     raf.current = requestAnimationFrame(tick);
   };
 
+  const handleEnter = () => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    anim.current.target = 1;
+    if (!raf.current) raf.current = requestAnimationFrame(tick);
+  };
+
   const handleLeave = () => {
-    cancelAnimationFrame(raf.current);
-    path.current?.setAttribute("d", BLOB_REST);
+    anim.current.target = 0;
+    if (!raf.current && anim.current.amp > 0)
+      raf.current = requestAnimationFrame(tick);
   };
 
   return (
